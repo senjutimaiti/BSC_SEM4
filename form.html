@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>FORM</title>
+
+<head>
+    <style>
+        .form1 {
+            background-color: #9ca8ec;
+            width: 500px;
+            margin: auto;
+        }
+        
+        input#name {
+            color: #8f8f8f;
+        }
+        
+        input#mail {
+            color: #8f8f8f;
+            width: 300px;
+        }
+    </style>
+</head>
+
+<body style="background-color: antiquewhite;">
+    <div class="form1">
+        <form>
+            <fieldset style="padding: 10px;">
+                <legend style="align-items: center; color: blue;">
+                    <h3>Employee Registration Form</h3>
+                </legend>
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" placeholder="First name">
+                <input type="text" name="name" id="name" placeholder="Last name"><br>
+                <p><label>Sex: </label>
+                    <select name="sex" id="sex">
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                    </select>
+                </p>
+                <label for="fname">Email Address:</label>
+                <input type="email" name="name" id="mail" value="example: abc@xyz.com"><br><br>
+                <label for="mname">Contact Number:</label>
+                <input type="tel" name="mname" id="mname"><br>
+                <p><label>Date of birth:</label>
+                    <input type="date" name="mname" id="name" value="DD-MM-YYYY">
+                </p>
+                <label for="address">Address:</label><br>
+                <textarea style="width:300px; height: 200px;"></textarea><br>
+                <p><label>Educational Degree:</label><br>
+                    <input type="checkbox" id="d1" name="d1" value="ug">
+                    <label for="d1"> Under graduate</label><br>
+                    <input type="checkbox" id="d2" name="d2" value="pg">
+                    <label for="d2"> Bachelor</label><br>
+                    <input type="checkbox" id="d3" name="d3" value="masters">
+                    <label for="d3"> Masters</label>
+                </p>
+                <label for="app">Applying for position:</label>
+                <input type="text" name="app" id="app"><br><br>
+                <input type="button" value="Submit">
+            </fieldset>
+        </form>
+    </div>
+</body>
+
+</html>
+<!--Name
+Sex (should be radio button)
+Father's Name
+Mother's Name
+DOB
+Nationality (value will be inside label)
+Educational Degree (should be in checkbox)
+Hobbies
+Languages (Hindi, English, Bengali) should have options of Speak and Write under each language
+Apply/Submit Buttons-->
