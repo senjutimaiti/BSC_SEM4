@@ -1,0 +1,324 @@
+8085 PROGRAM:
+
+---------NO. OF 1s------------------------
+LXI H,0030H
+MOV B,M
+INX H
+MVI C,01H
+MOV A,C
+PF: ANA B
+JZ LOOP
+INR M
+LOOP: MOV A,C
+RAL
+MOV C,A
+JNC PF
+HLT
+------------------------------------------
+
+-------ODD EVEN---------------------------
+LXI H,0030H		
+MOV A,M
+ANI 01H
+HLT
+------------------------------------------
+
+------LARGER NUMBER-----------------------
+LXI H,0030H
+MOV A,M
+INX H
+SUB M
+HLT
+------------------------------------------
+
+------GREY CODE-----------------------
+LXI H,0030H
+MVI C,80H
+MOV A,M
+ANA C
+MOV B,A
+MOV A,C
+RAR
+MOV C,A
+LOOP: MOV A,C
+RAL
+ANA M
+RAR
+MOV D,A
+MOV A,M
+ANA C
+XRA D
+ORA B
+MOV B,A
+MOV A,C
+RAR
+MOV C,A
+JNC LOOP
+INX H
+MOV M,B
+HLT
+------------------------------------------
+11001010
+10101111
+
+-------FACTORIAL--------------------------
+LXI H,0030H
+MOV B,M
+MVI H,01H
+MVI D,01H
+LP: MVI E,00H
+INR H
+MOV C,H
+LOOP:  MOV A,E
+ADD D
+MOV E,A
+DCR C
+MOV A,C
+JNZ LOOP
+MOV D,E
+MOV A,B
+SUB H
+JNZ LP
+LXI H, 0031H
+MOV M,D
+HLT
+------------------------------------------
+
+-------FIBONACCI--------------------------
+LXI H,0030H
+MVI B,00H
+MVI C,01H
+MVI D,00H
+MOV E,M
+LOOP: INX H
+MOV M,D
+MOV B,C
+MOV C,D
+MOV A,B
+ADD C
+MOV D,A
+DCR E
+MOV A,E
+JNZ LOOP
+HLT
+------------------------------------------
+
+ASSIGNMENT 8
+-------BCD TO BINARY----------------------
+LXI H,0030H
+MOV A,M
+ANI 0FH
+MOV B,A
+MOV A,M
+RRC
+RRC
+RRC
+RRC
+ANI 0FH
+MVI C,09H
+MOV D,A
+LOOP:  ADD D
+DCR C
+JNZ LOOP
+ADD B
+INX H
+MOV M,A
+HLT
+------------------------------------------
+
+-------BINARY TO ASCII--------------------
+LXI H,0050H
+MVI D,0AH
+MOV A,M
+ANI 0FH
+CMP D
+CNC SR
+ADI 30H
+MOV B,A
+MOV A,M
+RRC
+RRC
+RRC
+RRC
+ANI 0FH
+CMP D
+CNC SR
+ADI 30H
+MOV C,A
+INX H
+MOV M,B
+INX H
+MOV M,C
+HLT
+SR: ADI 07H
+RET
+------------------------------------------
+
+-------ASCII TO BINARY-------------------
+LXI H,0030H
+MOV A,M
+SUI 30H
+CPI 0AH
+JC LP
+SUI 07H
+LP: INX H 
+MOV M,A
+HLT
+------------------------------------------
+
+-------BCD ADDITION-----------------------
+LXI H,0030H
+MOV A,M
+INX H
+ADD M
+DAA
+INX H 
+JNC LP
+INR M
+LP: INX H
+MOV M,A
+HLT
+------------------------------------------
+
+-------ASSIGNMENT 1-----------------------
+MVI A,67H
+ANI 00H
+ADI 47H
+MOV B,A
+SUI 92H
+MOV C,A
+ADI 64H
+MOV D,A
+LXI H,0030H
+MOV M,C
+INX H
+MOV M,D
+HLT
+------------------------------------------
+
+-------ASSIGNMENT 2-----------------------
+LXI H,0030H
+MOV B,M
+INX H
+MOV C,M
+MOV A,B
+SUB C
+JNC LOOP
+XRI FFH
+ADI 01H
+LOOP: INX H 
+MOV M,A
+HLT
+------------------------------------------
+
+-------ASSIGNMENT 3-----------------------
+LXI H,0030H
+MOV A,M
+MVI C,0AH
+LOOP: INX H
+ADD M
+JNC LP
+INR B
+LP: DCR C
+JNZ LOOP
+LXI H,0040H
+MOV M,A
+INX H
+MOV M,B
+HLT
+------------------------------------------
+
+0030-0039 TO 0049-0040
+-------ASSIGNMENT 5-----------------------
+MVI C,0AH
+MVI H,00H
+MVI D,30H
+MVI E,49H
+LOOP:  MOV L,D
+MOV A,M
+INR D
+MOV L,E
+MOV M,A
+DCR E
+DCR C
+JNZ LOOP
+HLT
+------------------------------------------
+
+5 PAIR OF DATA BYTES
+-------ASSIGNMENT 6-----------------------
+LXI H,0030H
+MVI C,05H
+LOOP: MOV A,M
+INX H
+ADD M
+MVI M,00H
+JNC LP
+INR M
+LP: DCX H
+MOV M,A
+INX H
+INX H
+DCR C
+JNZ LOOP
+HLT
+------------------------------------------
+
+-------ASSIGNMENT 7-----------------------
+
+------------------------------------------
+
+SB sir
+
+----SUM OF EVEN NOs. from F500 TO F509 AND STORE THE SUM IN F600 AND CARRY IN F601-----------------------------
+
+LXI H,F500H
+MVI C,0AH
+MVI B,00H
+MVI D,00H
+LOOP: MOV A,M
+RAR
+JC LP
+RAL
+ADD B
+JNC LP2
+INR D
+LP2: MOV B,A
+LP: INX H
+DCR C
+JNZ LOOP
+LXI H,F600H
+MOV M,B
+INX H
+MOV M,D
+HLT
+------------------------------------------
+
+----DATA STORE IN F500 AND REVERSE IT AND STORE IT IN F600 -----------------------------
+LXI H,0030H
+MVI C,07H
+MOV A,M
+ANI 01H
+MOV B,A
+MOV E,M
+LOOP:  MOV A,E
+RRC
+MOV E,A
+ANI 01H
+MOV D,A
+MOV A,B
+RLC
+ORA D
+MOV B,A
+DCR C
+JNZ LOOP
+LXI H,0040H
+MOV M,B
+HLT
+
+USE CARRY TO PERFORM**
+------------------------------------------
+
+-------BINARY TO BCD----------------------
+
+-------MULTIPLY 2 4 BIT NUMBER------------
